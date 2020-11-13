@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/common/favicon.png">
+    <title>Dexter: Interactive Embedded Bot Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link rel="stylesheet" href="/01-minimal/index.css">
+    <script type="text/javascript" src="/common/dexter-interactive.js"></script>
+    <script type="text/javascript" src="/01-minimal/index.js"></script>
+  </head>
+
+  <body>
+    <section class="hero is-fullheight is-default is-bold">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="https://rundexter.com">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewbox="0 0 478 93.2"
+                  height="20"
+                  >
+                    <path d="M32.1 24.5V2.1C32.1.9 31.1 0 30 0H2.1C.9 0 0 .9 0 2.1v22.4c0 1.2.9 2.1 2.1 2.1H30c1.1.1 2.1-.9 2.1-2.1z"></path>
+                    <path d="M50.8 8.8H40.7c-1.2 0-2.1.9-2.1 2.1v18.4c0 1.2.9 2.1 2.1 2.1h8.1c10.2 0 17.7 7.4 17.7 21.4C66.5 66.7 53 71 48 71h-9c-1.2 0-2.1-.9-2.1-2.1V35.1c0-1.2-.9-2.1-2.1-2.1H14.7c-1.2 0-2.1.9-2.1 2.1v56.1c0 1.2.9 2.1 2.1 2.1h37.6c7.5 0 39.7-4.4 39.7-43.6C92 10.6 54.3 8.8 50.8 8.8zm266 .2h-56.6c-.8 0-1.5.4-1.9 1.1l-11 18.3c-.4.7-.2 1.7.5 2.1.3.2.7.3 1 .3H268c1.3 0 2.3 1 2.3 2.3v58c0 1.3 1 2.3 2.3 2.3h20.3c1.3 0 2.3-1 2.3-2.3V33c0-1.3 1-2.3 2.3-2.3H317c1.3 0 2.3-1 2.3-2.3V11.3c-.2-1.3-1.2-2.3-2.5-2.3zm-154-.3H99.4c-1.2 0-2.1.9-2.1 2.1v80.3c0 1.2.9 2.1 2.1 2.1h63.3c1.2 0 2.1-.9 2.1-2.1v-17c0-1.2-.9-2.1-2.1-2.1h-39.1c-1.2 0-2.1-.9-2.1-2.1V64c0-1.2.9-2.1 2.1-2.1h22c1.2 0 2.1-.9 2.1-2.1v-18c0-1.2-.9-2.1-2.1-2.1h-22c-1.2 0-2.1-.9-2.1-2.1v-6.1c0-1.2.9-2.1 2.1-2.1h39.1c1.2 0 2.1-.9 2.1-2.1V10.8c.1-1.1-.9-2.1-2-2.1zm229 0h-63.3c-1.2 0-2.1.9-2.1 2.1v80.3c0 1.2.9 2.1 2.1 2.1h63.3c1.2 0 2.1-.9 2.1-2.1v-17c0-1.2-.9-2.1-2.1-2.1h-39.1c-1.2 0-2.1-.9-2.1-2.1V64c0-1.2.9-2.1 2.1-2.1h22c1.2 0 2.1-.9 2.1-2.1v-18c0-1.2-.9-2.1-2.1-2.1h-22c-1.2 0-2.1-.9-2.1-2.1v-6.1c0-1.2.9-2.1 2.1-2.1h39.1c1.2 0 2.1-.9 2.1-2.1V10.8c0-1.1-.9-2.1-2.1-2.1zm66 55c-.6-1.1-.2-2.4.9-3 4.3-2.1 13.8-8.4 13.8-22.9 0-24.4-24.6-28.8-29.6-28.8h-39.6c-1.2 0-2.1.9-2.1 2.1v80.1c0 1.2.9 2.1 2.1 2.1h20.2c1.2 0 2.1-.9 2.1-2.1V67.6c0-1.2.9-2.1 2.1-2.1h4.5c.8 0 1.5.4 1.9 1.1l13.4 25.6c.4.7 1.1 1.1 1.9 1.1h22.3c1.6 0 2.7-1.8 1.8-3.2l-15.7-26.4zm-19.5-18.9h-10.8c-1.2 0-2.1-.9-2.1-2.1V32.2c0-1.2.9-2.1 2.1-2.1h10.2c7.5 0 9.8 2.5 9.8 8 0 5.4-5.6 6.7-9.2 6.7z"></path>
+                    <path d="M226.9 52.1c-.4-.7-.4-1.5 0-2.2l22.6-38c.8-1.4-.2-3.2-1.8-3.2h-23.3c-.8 0-1.5.4-1.9 1.1l-9.2 17.3c-.8 1.5-3 1.5-3.7 0l-8.9-17.2c-.4-.7-1.1-1.1-1.9-1.1h-23.7c-1.6 0-2.6 1.7-1.8 3.2l21.4 37.7c.4.7.4 1.5 0 2.1L172 90c-.8 1.4.2 3.2 1.8 3.2h23.4c.8 0 1.5-.4 1.9-1.1l9.3-18.2c.8-1.5 2.9-1.5 3.7-.1l10.4 18.4c.4.7 1.1 1.1 1.8 1.1h23.3c1.6 0 2.7-1.8 1.8-3.2l-22.5-38z"></path>
+                </svg>
+              </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <div class="tabs is-right">
+                  <ul>
+                    <li><a href="/">Examples index</a></li>
+                    <li><a href="https://github.com/rundexter/dexter-interactive">Documentation / Github</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div id="current-emoji"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

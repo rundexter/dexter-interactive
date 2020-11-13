@@ -1,0 +1,41 @@
+// Handle button pagination (see buttonsPager for how)
++ more
+- <call>buttonsPager</call>
+
+// Kick off the process
++ go
+- What broad category are you interested in? <call>buttonsPager "People"  "History" "Geography" "Arts" "Philosophy" "Everyday life" "Society" "Health" "Science" "Technology" "Mathematics" 3</call>
+
+// Level1 selections
++ people
+- <set level1=People> ^metadata({"level1": "People"}) What kind? <call>buttonsPager "Leaders" "Religious" "Philosophers" "Writers" "Musicians" "Scientists" "Mathematicians" "Artists" "Filmmakers" "Businesspeople" 3</call> {topic=level2}
+
++ history
+- <set level1=History> ^metadata({"level1": "History"}) What kind? <call>buttonsPager "General" "Regional" "Topical" "Prehistory" "Ancient" "Post-classical" "Modern" 3</call> {topic=level2}
+
++ geography
+- <set level1=Geography> ^metadata({"level1": "Geography"}) What kind? <call>buttonsPager "General" "Regional" "Cities" "Countries" "Water" "Terrain" 3</call> {topic=level2}
+
++ arts
+- <set level1=Arts> ^metadata({"level1": "Arts"}) What kind? <call>buttonsPager "General" "Movements" "Architecture" "Literature" "Music" "Performance" "Visual" 3</call> {topic=level2}
+
++ philosophy
+- <set level1=Philosophy and religion> ^metadata({"level1": "Philosophy and religion"}) What kind? <call>buttonsPager "General" "Religion" "Religions" 3</call> {topic=level2}
+
++ everyday life
+- <set level1=Everyday life> ^metadata({"level1": "Everyday life"}) What kind? <call>buttonsPager "General" "Family" "Sexuality" "Food" "Recreation" 3</call> {topic=level2}
+
++ society
+- <set level1=Society and social sciences> ^metadata({"level1": "Society and social sciences"}) What kind? <call>buttonsPager "General" "Politics" "Conflict" "Education" "Economics" "Issues" "Law" "Psychology" "Language" "Media" 3</call> {topic=level2}
+
++ health
+- <set level1=Health, medicine and disease> ^metadata({"level1": "Health, medicine and disease"}) What kind? <call>buttonsPager "Injury" "Care" "Chemistry" 3 </call> {topic=level2}
+
++ science
+- <set level1=Science> ^metadata({"level1": "Science"}) What kind? <call>buttonsPager "General" "Astronomy" "Physics" "Biology" "Chemistry" "Earth" 3 </call> {topic=level2}
+
++ technology
+- <set level1=Technology> ^metadata({"level1": "Technology"}) What kind? <call>buttonsPager "General" "Energy" "Biological" "Weapons" "Mechanical" "Communication" "Computing" "Electronic" "Space" "Transportation" "Navigation" "Civil" "Material" "Optical" 3 </call> {topic=level2}
+
++ mathematics
+- <set level1=Mathematics> ^metadata({"level1": "Mathematics"}) What kind? <call>buttonsPager "Basics" "Arithmetic" "Geometry" "Algebra" "Analysis" "Statistics" "Other" 3 </call> {topic=level2}

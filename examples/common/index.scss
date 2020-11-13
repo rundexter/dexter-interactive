@@ -1,0 +1,28 @@
+@charset "utf-8";
+// Make sure we have our fonts available (these should be pulled/served locally)
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Nunito&display=swap');
+// Set up our local variables to override Bulma's
+// https://bulma.io/documentation/customize/variables/
+$family-primary: 'Nunito', sans-serif;
+$family-title: 'Montserrat', sans-serif;
+
+// Import the bulma files we need
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/grid/columns.sass";
+@import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/components/tabs.sass";
+@import "~bulma/sass/layout/hero.sass";
+
+// Real custom CSS below
+.navbar-item svg {
+  width: 103px;
+}
+
+.hero img {
+  padding: 5px;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,15 @@
+// Introduce the bot to users
++ [*] (hi|hello|sup|yo|help|wtf|menu) [*]
+- Hey there! This is a super simple example of how to use a bot to help a user navigate your site. We'll just be digging into an index using buttons, but you can imagine how this could extend into search, product recommendations, feature discovery, and more. <send> {@ start}
+
+// Sent here after we're done
++ reprompt
+- Want more? ^buttons('Start over')
+
+// Kick off the process
++ (start|restart|start over)
+- Let's take it from the top. {topic=level1} {@ go}
+
+// Handle everything we don't handle explicitly
++ *
+- Hmm, I'm not sure what that is. This is just a simple example bot, after all. <send> {@ restart}

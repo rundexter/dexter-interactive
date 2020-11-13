@@ -1,0 +1,43 @@
+> object buttonsPager javascript
+const user = rs.currentUser()
+  , key = '_buttonPager'
+;
+let pager = null;
+// Called 2 ways:
+// Setup: buttonsPager(button1 button2 button3 count)
+//    ex: buttonsPager(foo bar baz 2) => ^buttons(foo, bar, more) then ^buttons(baz, more)
+//  Page: buttonsPager()
+//    ex: buttonsPager() 
+if (args.length === 0) {
+  // Get the next page of the last saved buttons set
+  pager = rs.getUservar(user, key);
+  // Increment the page, or roll back to the beginning if we've gone too far
+  pager.page = (pager.page + 1) * pager.count >= pager.buttons.length ? 0 : pager.page + 1;
+} else {
+  // Set up a new pager where buttons are everything but the last argument, which is the count
+  pager = {buttons: _.initial(args), count: _.last(args), page: 0};
+}
+// Update the stored pager with the latest state
+rs.setUservar(user, key, pager);
+// Turn it all into a buttons shortcode
+return [
+  '^buttons('
+  , pager.buttons.length > pager.count
+    // If we have more than 1 page of buttons, get the right page and add "More"
+    ? _(pager.buttons)
+      // Break the buttons into arrays of buttons based on page size
+      .chunk(pager.count)
+      // Grab the correct page (at this point we have an array, not a lodash set)
+      .nth(pager.page)
+      // Add a "more" button
+      .concat('More')
+      .join(', ')
+    // Otherwise just show all the buttons
+    : pager.buttons.join(', ')
+  , ')'
+].join('');
+< object
+
+> object routeGeneral
+return rs.reply(rs.currentUser(), 'route ' + _.upperFirst(args[0]));
+< object

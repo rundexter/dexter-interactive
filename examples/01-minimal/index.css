@@ -1,0 +1,20 @@
+.hero-body {
+  margin-right: 350px;
+}
+
+@media (max-width: 600px) {
+  .hero-body {
+    margin-right: 0;
+  }
+}
+
+#current-emoji {
+  text-align: center;
+  font-size: 300px;
+}
+
+@media (max-width: 600px) {
+  #current-emoji {
+    font-size: 200px;
+  }
+}

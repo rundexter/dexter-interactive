@@ -1,0 +1,15 @@
+{
+  "name": "interactive-embed-demo-ex02-builder",
+  "version": "0.0.1",
+  "description": "Build the list of articles for example 2",
+  "main": "build-article-json.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "jsdom": "^16.4.0"
+  }
+}

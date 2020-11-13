@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Directory where script is located
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# The root of our project
+ROOTDIR="$DIR/.."
+# Directory where compiled code is written
+DISTDIR="$ROOTDIR/dist"
+# Directory where npm binaries are cached
+BINDIR="$ROOTDIR/node_modules/.bin"
+
+# Generate analyzed production code
+"$BINDIR/webpack" --config "$ROOTDIR/webpack.config.prod.babel.js" --profile --json > "$ROOTDIR/analysis.json"
+# Dumb trick since dist gets wiped during the above.  This way it gets scrubbed on next build.
+mv "$ROOTDIR/analysis.json" "$DISTDIR/analysis.json"
+
+# Funnel it into webpack analyzer
+"$BINDIR/webpack-bundle-analyzer" "$DISTDIR/analysis.json" "$DISTDIR"

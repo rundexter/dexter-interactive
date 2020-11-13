@@ -1,0 +1,24 @@
+// From various sources
+!array good = adorable|accepted|believe|beneficial|bliss|bountiful|acclaimed|accomplish|simple|skilled|skillful|smile|achievement|action|active|agree|agreeable|amazing|angelic|beaming|beautiful|bounty|brave|bravo|brilliant|bubbly|ecstatic|calm|celebrated|certain|champ|energetic|energized|engaging|enthusiastic|essential|champion|classical|clean|commend|composed|congratulation|constant|cool|courageous|creative|cute|effective|dazzling|delight|delightful|distinguished|divine|effervescent|efficient|effortless|electrifying|soulful|sparkling|special|spirited|elegant|admire|adventure|affirmative|affluent|enchanting|encouraging|endorsed|esteemed|ethical|excellent|exciting|exquisite|fabulous|fair|familiar|famous|fantastic|favorable|fetching|fine|fitting|flourishing|fortunate|free|fresh|friendly|fun|funny|paradise|generous|genius|genuine|giving|glamorous|glowing|good|gorgeous|graceful|great|green|grin|growing|perfect|healthy|charming|cheery|choice|classic|hearty|heavenly|honest|honorable|honored|hug|idea|ideal|innovative|instant|instantaneous|instinctive|imaginative|imagine|success|successful|sunny|handsome|happy|harmonious|healing|super|superb|supporting|impressive|independent|inventive|phenomenal|augh|legendary|light|learned|poised|polished|popular|innovate|intuitive|intellectual|intelligent|positive|lovely|lucid|lucky|luminous|jovial|welcome|well|whole|worthy|wow|joy|jubilant|pleasurable|plentiful|pleasant|powerful|prepared|pretty|wholesome|willing|wonderful|wondrous|principled|productive|safe|satisfactory|secure|seemly|spiritual|stirring|stupendous|stunning|surprising|progress|prominent|protected|proud|awesome|lit
+// There's less sources for these, so we're hand-coding
+!array neutral = ok|decent|tolerable|meh|eh|alright|all right|mediocre|another day|same old|tolerable|same shit|aaight|could be worse
+!array bad = bad|terrible|awful|crap|crappy|shit|shitter|shitty|garbage|ass|miserable|horrible|suck|sucked|sucky|junk|had better|bah|blah|dont ask|dumpster|dump
+
++ [*] (hi|hello|help|menu|about) [*]
+- This is a really simple little bot designed to show the basics of how a bot can interact with your web page.  Don't expect incredible things, just say something to let us know how your day is going or how you feel - anything from "Oh my god it's wonderful" to "Yeah, today is a dumpster fire."  We'll try to commiserate.
+
++ [*] (@good) [*]
+- ^metadata({"vibe":"good"}) Glad to hear it!
+
++ [*] (@neutral) [*]
+- ^metadata({"vibe": "neutral"}) Well, hopefully tomorrow is a little brighter.
+
++ [*] (@bad) [*]
+- ^metadata({"vibe": "bad"}) Ugh, sorry to hear that.  This always cheers us up at Dexter, mabye it'll help you too: <send> ^link(https://old.reddit.com/r/aww/top/?sort=top&t=week)
+
+// This gets sent by the client if we go < 600px wide, which is where the dexter widget goes full-screen.
++ invalid-screen-size
+- Sorry, but this example won't work well when the screen is this small, as the chat window will hide the demo. You can close the chat window after saying something to at least get a feel for what's going on. <send> {@ hi}
+
++ *
+- ^metadata({"vibe": "unknown"}) Bah, sorry, I don't know how to respond to that. <send> {@ help}

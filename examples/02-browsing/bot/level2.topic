@@ -1,0 +1,135 @@
+// Handle button pagination (see buttonsPager for how)
++ more
+- <call>buttonsPager</call>
+
+// Handle all our unshortened button clicks
++ *
+- <call>routeGeneral <star></call>
+
+// Deal with the final response to the client
++ route *
+- ^metadata({"level1": "<get level1>", "level2": "<sentence>"}) Great, let's see what we have for you. {topic=default} <send> {@ reprompt}
+
+// We shortened the names of a lot of level2 categories to make buttons cleaner, so we'll fix them
+// here if necessary.
+
+// People
++ leaders
+- {@ route Politicians and leaders}
+
++ religious
+- {@ route Religious figures}
+
++ philosophers
+- {@ route Philosophers and social scientists}
+
++ musicians
+- {@ route Composers and musicians}
+
++ scientists
+- {@ route Inventors and scientists}
+
+// History
++ regional
+* <get level1> == Geography => {@ route Continents and regions}
+- {@ route History by region}
+
++ topical
+- {@ route History by subject}
+
++ ancient
+- {@ route Ancient history}
+
++ post-classical
+- {@ route Post-classical history}
+
++ modern
+- {@ route Modern history}
+
+// Geography
+// regional - see disambiguation under History for Continents and regions
+
++ water
+- {@ route Hydrological features}
+
++ terrain
+- {@ route Terrestrial features}
+
+// Arts
+
++ movements
+- {@ route Artistic movements}
+
++ performance
+- {@ route Performing arts}
+
++ visual
+- {@ route Visual arts}
+
+// Philosophy and religion
+
++ religions
+- {@ route Specific religions}
+
+// Everyday life
+
++ family
+- {@ route Family and kinship}
+
++ sexuality
+- {@ route Sexuality and gender}
+
++ food
+- {@ route Food and drink}
+
++ recreation
+- {@ route Recreation and entertainment}
+
+// Society and social sciences
+
++ politics
+- {@ route Politics and government}
+
++ economics
+- {@ route Business and economics}
+
++ issues
+- {@ route Social issues}
+
+// Health, medicine and disease
+
++ injury
+- {@ route Illness and injury}
+
++ care
+- {@ route Health, fitness, and medicine}
+
++ chemistry
+- {@ route Drugs and medication}
+
+// Science
+
++ earth
+- {@ route Earth science}
+
+// Technology
+
++ biological
+- {@ route Food and health}
+
++ mechanical
+- {@ route Tools and machinery}
+
++ communication
+- {@ route Media and communication}
+
++ computing
+- {@ route Computing and information technology}
+
++ navigation
+- {@ route Navigation and timekeeping}
+
+// Mathematics
+
++ statistics
+- {@ route Probability and statistics}

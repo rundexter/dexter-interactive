@@ -1,0 +1,67 @@
+/* Apparently some browsers / CSS rules have issues with this, so we'll hack/fix it quickly */
+[hidden] { display: none !important; }
+
+#prompt {
+  text-align: center;
+  max-width: 50%;
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  #prompt {
+    max-width: 100%;
+  }
+}
+
+#articles {
+  margin-right: 350px;
+}
+
+@media (max-width: 600px) {
+  #articles {
+    margin-right: 0;
+  }
+}
+
+.article {
+  text-align: center;
+}
+
+.article > div {
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  padding: 0.75rem;
+  height: 500px;
+}
+
+.article img {
+  border-radius: 20px;
+  height: 200px;
+  margin: auto;
+}
+
+.article figcaption {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  padding-top: 10px;
+  text-align: left;
+  height: 200px;
+}
+
+/*
+#articles {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: auto;
+  align-content: start;
+}
+
+.article {
+  flex: 0 0 auto;
+  margin: 20px;
+  max-width: 30%;
+}
+*/
