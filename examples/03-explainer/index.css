@@ -1,0 +1,21 @@
+/* Apparently some browsers / CSS rules have issues with this, so we'll hack/fix it quickly */
+[hidden] { display: none !important; }
+
+.hero-body {
+  margin-right: 350px;
+}
+
+@media (max-width: 600px) {
+  .hero-body {
+    margin-right: 0;
+  }
+}
+
+.hero-body .tabs li {
+  /* Reinstate this - it normally gets removed in .hero */
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.card {
+  max-width: 800px;
+}

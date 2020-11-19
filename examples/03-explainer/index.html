@@ -5,9 +5,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dexter: Interactive Embedded Bot Demo</title>
+    <link rel="shortcut icon" href="/common/favicon.png">
+    <title>Dexter: Interactive Explainer Demo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="/03-explainer/index.css">
+    <script type="text/javascript" src="/common/dexter-interactive.js"></script>
+    <script type="text/javascript" src="/03-explainer/index.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
   </head>
 
   <body>
@@ -32,7 +37,7 @@
               <div class="navbar-end">
                 <div class="tabs is-right">
                   <ul>
-                    <li class="is-active"><a href="/">Examples index</a></li>
+                    <li><a href="/">Examples index</a></li>
                     <li><a href="https://github.com/rundexter/dexter-interactive">Documentation / Github</a></li>
                   </ul>
                 </div>
@@ -43,21 +48,69 @@
       </div>
       <div class="hero-body">
         <div class="container">
-          <div class="columns is-vcentered">
-            <div class="column is-5 content">
-              <h1>Deter Interactive Examples</h1>
-              <ul>
-                <li><a href="./01-minimal/index.html" title="Basic example"><strong>01</strong>: The Basics</a></li>
-                <li><a href="./02-browsing/index.html" title="Bot-based browsing"><strong>02</strong>: Bot-driven Browsing</a></li>
-                <li><a href="./03-explainer/index.html" title="UI tutor bot"><strong>03</strong>: HTML Explainer</a></li>
-              </ul>
-              <h2>What is this?</h2>
-              <p>
-                <a href="https://rundexter.com" title="Learn more about Dexter">Dexter</a> is a chatbot authoring and hosting platform that lets you add bots to Facebook, Slack, webpages, and more.
-                <a href="https://github.com/rundexter/dexter-interactive" title="Find out more about this library">Dexter Interactive</a> is a javascript library that helps your website react to the conversation taking place in your bot. These are some simple examples of how it works.
-              </p>
-            </div>
+          <h1 class="title">A Dog's Day</h1>
+          <h2 class="subtitle">What adventures will our hero have today?</h2>
+					<div class="tabs" id="dog-nav">
+            <ul>
+              <li class="is-active"><a href="#01-park">The Park</a></li>
+              <li><a href="#02-hike">The Hike</a></li>
+              <li><a href="#03-anticipation">Anticipation</a></li>
+            </ul>
           </div>
+					<div class="card" id="01-park">
+						<div class="card-image">
+							<figure class="image is-4by3">
+								<img src="/03-explainer/dog1.jpg" alt="This is a dog">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="media">
+								<div class="media-content">
+									<p class="title is-4">It all starts in a park</p>
+								</div>
+							</div>
+
+							<div class="content">
+								The day began with fetch and chasing squirrels, and it was good.
+							</div>
+						</div>
+					</div>
+					<div class="card" id="02-hike" hidden>
+						<div class="card-image">
+							<figure class="image is-4by3">
+								<img src="/03-explainer/dog2.jpg" alt="This is a dog">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="media">
+								<div class="media-content">
+									<p class="title is-4">On to the trails</p>
+								</div>
+							</div>
+
+							<div class="content">
+                More time on the trails is never wrong. Wet feet may be.
+							</div>
+						</div>
+					</div>
+					<div class="card" id="03-anticipation" hidden>
+						<div class="card-image">
+							<figure class="image is-4by3">
+								<img src="/03-explainer/dog3.jpg" alt="This is a dog">
+							</figure>
+						</div>
+						<div class="card-content">
+							<div class="media">
+								<div class="media-content">
+									<p class="title is-4">Dreams of tomorrow</p>
+								</div>
+							</div>
+
+							<div class="content">
+                What adventures will tomorrow bring? Only time will tell.
+							</div>
+						</div>
+					</div>
         </div>
       </div>
     </section>
