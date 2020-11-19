@@ -1,0 +1,99 @@
+#!/bin/bash
+
+# Set up strictish mode a la http://redsymbol.net/articles/unofficial-bash-strict-mode/
+set -euo pipefail
+IFS=$'\n\t'
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BUILD_FROM=master
+DRY_RUN=0
+
+function echo_spacer {
+  echo ""
+  echo "-------------------------------------------------------------------"
+  echo ""
+}
+
+function help {
+    local msg=$1
+    if [[ ! -z $msg ]]; then
+      echo "$msg"
+      echo_spacer
+    fi 
+    echo "Usage:   ./npm-deploy.bsh"
+    echo "  --build-from [master]"  # Which branch should be buildable - use to test this script. Defaults to master.
+    echo "  --dry-run"              # Set to 1 to test the deploy
+    echo_spacer
+    echo "You should be on the master branch, or your --build-from branch if you're testing this script."
+    echo "Your working folder must be clean to proceed."
+    echo "It is recommended that you do a --dry-run first and check the script output for files that don't need deployment."
+}
+
+function prebuild {
+  # Switch to a temporary branch so we don't save any of our build tweaks
+  git checkout -b build
+  # Make sure we have a compiled script file
+  npm run build:production
+  # Get rid of files that don't need to be in the final package
+  git rm -r bin
+  git rm -r examples
+  git rm -r tests
+  git rm webpack*
+  git rm .eslint*
+  git rm babel.config.json
+  git commit -am 'Cleaned up files for build'
+}
+
+function cleanup {
+  # Undo all our build changes
+  git checkout "$BUILD_FROM"
+  git branch -D build
+}
+trap cleanup EXIT
+
+while [[ $# > 0 ]]; do
+    key="$1"
+
+    case $key in
+        --build-from)
+            BUILD_FROM="$2"
+            shift
+            ;;
+        --dry-run)
+            DRY_RUN=1
+            ;;
+        *)
+            help "Unknown parameter $key"
+            return 1 2> /dev/null || exit 1
+            ;;
+    esac
+    shift # past argument or value
+done
+
+# Make sure we're in the project root
+pushd "$DIR/.."
+
+# Make sure we're in a sane state to start the build
+if [[ ! -z "$(git status --porcelain)" ]]; then
+  help "ERROR: Build directory not clean - will not proceed"
+  exit 1
+fi
+if [[ $(git branch --show-current) != "$BUILD_FROM" ]]; then
+  help "ERROR: Will only build from $BUILD_FROM"
+  exit 1
+fi
+
+# Get us in a clean slate for deployment
+prebuild
+# Perform the actual packing and/or deploy
+if [[ $DRY_RUN == 1 ]]; then
+  npm pack
+  echo_spacer
+  echo "Check to make sure no files are being deployed accidentally"
+else
+  npm deploy --access public
+fi
+# Return us to our original state
+cleanup
+# Go back to wherever we started
+popd
