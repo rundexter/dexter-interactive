@@ -4,3 +4,4 @@ tests
 webpack*
 .eslint*
 babel*
+.stylelintrc.json

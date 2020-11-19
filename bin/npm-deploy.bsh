@@ -7,6 +7,7 @@ IFS=$'\n\t'
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BUILD_FROM=master
 DRY_RUN=0
+NEEDS_CLEANUP=0
 
 function echo_spacer {
   echo ""
@@ -15,31 +16,38 @@ function echo_spacer {
 }
 
 function help {
-    local msg=$1
-    if [[ ! -z $msg ]]; then
-      echo "$msg"
-      echo_spacer
-    fi 
-    echo "Usage:   ./npm-deploy.bsh"
-    echo "  --build-from [master]"  # Which branch should be buildable - use to test this script. Defaults to master.
-    echo "  --dry-run"              # Set to 1 to test the deploy
+  local msg=$1
+  if [[ ! -z $msg ]]; then
+    echo "$msg"
     echo_spacer
-    echo "You should be on the master branch, or your --build-from branch if you're testing this script."
-    echo "Your working folder must be clean to proceed."
-    echo "It is recommended that you do a --dry-run first and check the script output for files that don't need deployment."
+  fi 
+  echo "Usage:   ./npm-deploy.bsh"
+  echo "  --build-from [master]"  # Which branch should be buildable - use to test this script. Defaults to master.
+  echo "  --dry-run"              # Set to 1 to test the deploy
+  echo_spacer
+  echo "You should be on the master branch, or your --build-from branch if you're testing this script."
+  echo "Your working folder must be clean to proceed."
+  echo "It is recommended that you do a --dry-run first and check the script output for files that don't need deployment."
 }
 
 function prebuild {
   # Make sure we have a compiled script file
   npm run build:production
+  NEEDS_CLEANUP=1
 }
 
 function cleanup {
   # Undo all our build changes
-  git checkout "$BUILD_FROM"
   git reset --hard HEAD
+  NEEDS_CLEANUP=0
 }
-trap cleanup EXIT
+
+function on_exit {
+  if [[ $NEEDS_CLEANUP == 1 ]]; then
+    cleanup
+  fi
+}
+trap on_exit EXIT
 
 while [[ $# > 0 ]]; do
     key="$1"
