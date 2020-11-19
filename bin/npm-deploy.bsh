@@ -30,24 +30,14 @@ function help {
 }
 
 function prebuild {
-  # Switch to a temporary branch so we don't save any of our build tweaks
-  git checkout -b build
   # Make sure we have a compiled script file
   npm run build:production
-  # Get rid of files that don't need to be in the final package
-  git rm -r bin
-  git rm -r examples
-  git rm -r tests
-  git rm webpack*
-  git rm .eslint*
-  git rm babel.config.json
-  git commit -am 'Cleaned up files for build'
 }
 
 function cleanup {
   # Undo all our build changes
   git checkout "$BUILD_FROM"
-  git branch -D build
+  git reset --hard HEAD
 }
 trap cleanup EXIT
 
