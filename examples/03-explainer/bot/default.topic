@@ -1,0 +1,102 @@
+!array title = title|titles|heading|headings|header|headers|lede|h1|h2
+
+/////////////////////////////////////////////////////
+//
+//  General UI
+//
+/////////////////////////////////////////////////////
++ [*] (hi|hello|start|welcome) [*]
+- Welcome! This is an example of how to use a bot to help document and teach about features on your site. You can ask about different parts of the page or about things you see in the contents. The bot and the page will team up to tell you more about what you've asked. <send> Here's some ideas on how to start, but there's plenty more to ask about! <send> {@ sample-menu}
+
++ reprompt
+- What else can I help you with? Don't be afraid to ask for *hints*.
+
++ [*] (hints|help) [*]
+- Ask me about things on this page! Here's a few examples, though I know about plenty more. <send> {@ sample-menu}
+
++ sample-menu
+- ^buttons('title', 'image', 'park')
+- ^buttons('tabs', 'card text', 'smile')
+- ^buttons('images', 'subtitle', 'floor')
+
+// This gets sent by the client if we go < 600px wide, which is where the dexter widget goes full-screen.
++ invalid-screen-size
+- Sorry, but this example doesn't really work on small screens. Check out our other examples - especially #2 - for a better mobile experience. You can just close the chat and see a cute dog, at least.
+
+/////////////////////////////////////////////////////
+//
+//  Element help
+//
+/////////////////////////////////////////////////////
+// Note that prompts starting with "card" or "figure" route elsewhere due to {weight=2}
++ [*] (@title) [*]
+- ^metadata({"tag": "title"}) Titles on a page are generally large, prominent text. Under the hood they're usually part of some kind of "<raw><h?></raw>" tag, like <raw><h1>My story</h1></raw> <send> {@ reprompt}
+
++ [*] (subtitle|h3|h4) [*]
+- ^metadata({"tag": "subtitle"}) A subtitle can either be a slightly longer esposition of the title or it can denote a new section within the same category. For instance, if your title is "The Park", a valid subtitle could be either "Westfield Park, everyone's favorite romp" to describe it further, or "The Pond" to identify a more specific section within that theme. These are usually represented by some kind of "<raw><h?></raw>" or "<raw><p></raw>" tag. <send> {@ reprompt}
+
++ [*] (tabs|tab|nav|navigation|links|sections|pager|pagination|ul|li|ol|dl) [*]
+- ^metadata({"tag": "tabBar"}) In this example, navigation is accomplished by interacting with a few different "tabs" in a "tab bar". Each tab shows a different card. Navigation elements are usually collected in some kind of list, usually a "<raw><ul></raw>", or "unsorted list". <send> {@ reprompt}
+
+// Note that prompts containing title/text route elsewhere due to {weight=2}
++ [*] (cards|card|content|day|location|figure|image|article|div) [*]
+- ^metadata({"tag": "cards"}) Each part of the dog's day is contained in a container - what these are called can vary a lot from site to site. Here they're "card"s represented by "<raw><div></raw>" tags around a "<raw><figure></raw>" figure, which then contains a card title and card text. <send> {@ reprompt}
+
++ [*] (images|image|img|picture|photo|jpg|jpeg|png|img|art|graphic|graphics|dog|pup|puppy|doggie) [*]
+- ^metadata({"tag": "images"}) This is a picutre of a dog, and it is good. Images are almost always "<raw><img></raw>" tags and generally serve as the visual focal point of your content. They're often better when showing cute animals, especially dogs (sorry cat folks). <send> {@ reprompt}
+
++ [*] (card|figure) [*] (@title) [*] {weight=2}
+- ^metadata({"tag": "cardTitles"}) Each figure has a caption that's split between a title and the actual figure copy. Like other titles, these are oftensome kind of "<raw><h?></raw>" tag, like <raw><h3>My Picture</h3></raw>. <send> {@ reprompt}
+
++ [*] (card|figure) [*] (@title) [*] {weight=2}
+- {@ copy}
+
++ [*] (copy|text|description|p) [*] {weight=2}
+- ^metadata({"tag": "cardText"}) The actual text of the page is tied to each figure. Text is usually wrapped in a "<raw><p></raw>", or "paragraph" tag. <send> {@ reprompt}
+
+
+/////////////////////////////////////////////////////
+//
+//  Content descriptions
+//
+/////////////////////////////////////////////////////
++ [*] squirrel [*]
+- WHERE?!?!?! <send> {@ park}
+
++ [*] (park|ball|fetch) [*]
+- ^metadata({"tab": "01-park"}) The park is the best place, no questions asked. Squirrels are an added bonus. <send> {@ reprompt}
+
++ [*] (hike|trail|water|wet|feet) [*]
+- ^metadata({"tab": "02-hike"}) Hikes rock, but some delicate dogs don't like wet feet. We don't argue with a good dog. <send> {@ reprompt}
+
++ [*] (whats next|more|anticipation|floor|carpet|rug|thought|think|thinking|ponder|plan) [*]
+- ^metadata({"tab": "03-anticipation"}) We just need a nice meditaion spot and stress ball to come to terms with what's next. <send> {@ reprompt}
+
++ [*] (good dog|good boy|good girl|good pup|smoosh|aww|cute) [*] {weight=2}
+- You'll have no arguments from us. <send> {@ reprompt}
+
++ [*] (smile|grin) [*]
+- ^metadata({"tab": "01-park"}) This is a smile. <send> {@ reprompt}
+
++ [*] (concern|question|scare|fear|scared) [*]
+- ^metadata({"tab": "02-hike"}) This may show fear, but is more likely a smile. <send> {@ reprompt}
+
+/////////////////////////////////////////////////////
+//
+//  Easter eggs
+//
+/////////////////////////////////////////////////////
++ [*] (cat|cats|kitten|kitty) [*]
+- Sorry, we don't have any cats on this page. Maybe in a future example.
+
++ [*] (ears|expression|face) [*]
+- A million expressions are possible with big ears and a floppy face. <send> {@ reprompt}
+
++ [*] easter (egg|eggs) [*]
+- No easter eggs were found in either the park or on the trail. Or at least the dog hasn't told us about them. <send> {@ reprompt}
+
++ [*] what [*] name [*]
+- This is Birdie. Birdie says hi.
+
++ *
+- This bot created on rundexter.com

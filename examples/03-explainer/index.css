@@ -1,6 +1,11 @@
 /* Apparently some browsers / CSS rules have issues with this, so we'll hack/fix it quickly */
 [hidden] { display: none !important; }
 
+.tippy-box {
+  font-size: 1.25rem;
+  filter: drop-shadow(5px 5px 4px #888);
+}
+
 .hero-body {
   margin-right: 350px;
 }
