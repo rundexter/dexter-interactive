@@ -1,6 +1,4 @@
-let dexter = null
-  , interactive = null
-;
+let interactive = null;
 
 /**
  * Set up standard tip behavior
@@ -20,7 +18,7 @@ function bindTip(selector, content, placement) {
 }
 
 /**
- * Show a specific tag
+ * Show a specific tab/card
  *
  * @param {string} id - Which HTML id to show
  */
@@ -100,19 +98,12 @@ window.onload = () => {
       , baseUrl: 'https://bots.rundexter.com'
       , url: 'https://rundexter.com/webwidget-beta'
       , onLoad: (api) => {
-        dexter = api;
         if (interactive.isEmbedFullscreen()) {
-          dexter.replyTo('invalid-screen-size');
+          api.replyTo('invalid-screen-size');
         } else {
-          dexter.replyTo('hi');
+          api.replyTo('hi');
         }
       }
     }
   });
 };
-
-// TODO
-// Adjust tag position
-// Make them manual
-// Add meta:tag handler that shows the correct key from tags (need a loop)
-// Add meta:tab handler that shows the correct tab
