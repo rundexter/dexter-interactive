@@ -115,6 +115,70 @@ window.onload = () => {
 
 This snippet roughly shows how the interface works - when we get a `level2` signal in a bot response, we find the matching articles and render them to the screen. The `showArticles` method could easily be replaced with whatever routing strategy your application may use, be it a traditional `window.location` assignment or via deep integration with your favorite [single-page application](https://en.wikipedia.org/wiki/Single-page_application) tooling.
 
+### [Example 3 - Interactive Documentation](https://dexter-interactive.rundexter.com/03-explainer/index.html)
+If you're building a webapp, you generally need to consider what the learning curve for your users is going to be. The more tools you can provide that help users learn the ropes, the better. Your chatbot can become one of these tools with a little help from interactivity.
+
+[The bot](https://github.com/rundexter/dexter-interactive/blob/example-03/examples/03-explainer/bot/default.topic) is straightforward - we capture words that describe either an element on the page or something contextual to the content.
+
+```
+// Capture a question about a tag
++ [*] (title|titles|heading|headings|header|headers|lede|h1|h2) [*]
+- ^metadata({"tag": "title"}) Titles on a page are generally large, prominent text. Under the hood they're usually part of some kind of "<raw><h?></raw>" tag, like <raw><h1>My story</h1></raw>
+
++ [*] (park|ball|fetch) [*]
+- ^metadata({"tab": "01-park"}) The park is the best place, no questions asked. Squirrels are an added bonus.
+```
+
+Content-related requests are treated much like we do in example 2, where content appropriate matching the metadata's "tab" value is presented and a little extra information is offered inside the bot. When someone asks about a part of the page, however, we tab into the wonderful [Tippy](https://atomiks.github.io/tippyjs/) library to point the user at the element in question, allowing the description being shown in the bot to have some real context in the actual web page being discussd.
+
+```javascript
+const tags = {
+  title: tippy('.hero-body h1.title', {
+    , content: 'This is a title'
+    , trigger: 'manual'
+  })
+  // ...
+};
+/**
+ * Show a specific tab/card
+ *
+ * @param {string} id - Which HTML id to show
+ */
+function showTab(id) {
+  const cards = Array.from(document.getElementsByClassName('card'));
+  cards.forEach((card) => card.hidden = true);
+  document.getElementById(id).hidden = false;
+}
+/**
+ * Show a specific tag/tip
+ *
+ * @param {string} tag - The name of the tag to show
+ */
+function showTip(tag) {
+  tags[tag].forEach((tip) => {
+    if (isVisible(tip.reference)) {
+      tip.show();
+      setTimeout(() => tip.hide(), 3000);
+    }
+  });
+}
+dexterInteractive.createInteractiveBot({
+  // ...
+  handler: [
+    {metaPath: '0.tag', meta: /.+/, onMatch: (type, text, metadata) => {
+      showTip(metadata[0].tag);
+    }}
+    , {metaPath: '0.tab', meta: /.+/, onMatch: (type, text, metadata) => {
+      showTab(metadata[0].tab);
+    }}
+  ]
+  // ...
+});
+
+```
+
+If you want to take your explainer to the next level, libraries like [intro.js](https://introjs.com/) or [pageguide](http://tracelytics.github.io/pageguide/) could make for an even more compelling tutorial. You could also use your bot to pre-fill forms, help a user dive deeper into error messages, and more.
+
 ## Getting started
 
 ### Loading the library
