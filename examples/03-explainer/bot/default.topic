@@ -11,7 +11,7 @@
 + reprompt
 - What else can I help you with? Don't be afraid to ask for *hints*.
 
-+ [*] (hints|help) [*]
++ [*] (hint|hints|help) [*]
 - Ask me about things on this page! Here's a few examples, though I know about plenty more. <send> {@ sample-menu}
 
 + sample-menu
@@ -95,8 +95,8 @@
 + [*] easter (egg|eggs) [*]
 - No easter eggs were found in either the park or on the trail. Or at least the dog hasn't told us about them. <send> {@ reprompt}
 
-+ [*] what [*] name [*]
++ [*] name [*]
 - This is Birdie. Birdie says hi.
 
 + *
-- This bot created on rundexter.com
+- Hmmm...that one I don't know about. <send> {@ hint}
